@@ -124,6 +124,7 @@ func Layout(s schema.Stage, fs vfs.FS, console Console) error {
 func MatchPartitionFSLabel(label string, console Console) string {
 	if label != "" {
 		out, err := console.Run(fmt.Sprintf("blkid -l --match-token LABEL=%s -o device", label))
+		log.Debugf("OUTPUT: %s\n", out)
 		if err == nil {
 			return out
 		}
@@ -134,6 +135,7 @@ func MatchPartitionFSLabel(label string, console Console) string {
 func MatchPartitionPLabel(label string, console Console) string {
 	if label != "" {
 		out, err := console.Run(fmt.Sprintf("blkid -l --match-token PARTLABEL=%s -o device", label))
+		log.Debugf("OUTPUT: %s\n", out)
 		if err == nil {
 			return out
 		}
