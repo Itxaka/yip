@@ -338,13 +338,13 @@ func (dev *Disk) AddPartition(label string, size uint, fileSystem string, pLabel
 func (dev Disk) ReloadPartitionTable(console Console) error {
 	for tries := 0; tries <= 5; tries++ {
 		log.Debugf("Trying to reread the partition table of %s (try number %d)", dev, tries+1)
-		out, err := console.Run(fmt.Sprintf("blockdev --rereadpt %s", dev))
-		if err != nil && tries == 4 {
-			return errors.New(fmt.Sprintf("Could not reload partition table: %s", out))
-		}
-		out, err = console.Run("sync")
+		out, err := console.Run("sync")
 		if err != nil && tries == 4 {
 			return errors.New(fmt.Sprintf("Could not sync: %s", out))
+		}
+		out, err = console.Run(fmt.Sprintf("partprobe %s", dev))
+		if err != nil && tries == 4 {
+			return errors.New(fmt.Sprintf("Could not reload partition table: %s", out))
 		}
 
 		if err == nil {
