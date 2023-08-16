@@ -2,6 +2,8 @@ module github.com/mudler/yip
 
 go 1.18
 
+replace github.com/rancher-sandbox/linuxkit v1.0.1-0.20230517173613-432a87ba3e09 => github.com/itxaka/linuxkit v0.0.0-20230816211351-8aa42a49e002
+
 require (
 	github.com/Masterminds/sprig/v3 v3.2.3
 	github.com/apex/log v1.9.0
